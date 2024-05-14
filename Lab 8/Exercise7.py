@@ -1,0 +1,20 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+math_students = pd.read_csv('C:\\Users\\Rakon\\Desktop\\DataAnalytics\\Lab 8\\student_math_clean.csv')
+portuguese_students = pd.read_csv('C:\\Users\\Rakon\\Desktop\\DataAnalytics\\Lab 8\\student_portuguese_clean.csv')
+family_support_counts_math = math_students.groupby(['family_support', 'school']).size().unstack(fill_value=0)
+family_support_counts_portuguese = portuguese_students.groupby(['family_support', 'school']).size().unstack(fill_value=0)
+fig, axs = plt.subplots(1, 2, figsize=(12, 6))
+family_support_counts_math.plot(kind='bar', stacked=True, ax=axs[0], color=['skyblue', 'salmon'])
+axs[0].set_title('Math Subject - Family Support')
+axs[0].set_xlabel('Family Support')
+axs[0].set_ylabel('Count')
+axs[0].legend()
+family_support_counts_portuguese.plot(kind='bar', stacked=True, ax=axs[1], color=['skyblue', 'salmon'])
+axs[1].set_title('Portuguese Subject - Family Support')
+axs[1].set_xlabel('Family Support')
+axs[1].set_ylabel('Count')
+axs[1].legend()
+plt.tight_layout()
+plt.show()

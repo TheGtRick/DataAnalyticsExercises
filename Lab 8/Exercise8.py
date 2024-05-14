@@ -1,0 +1,22 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+math_students = pd.read_csv('C:\\Users\\Rakon\\Desktop\\DataAnalytics\\Lab 8\\student_math_clean.csv')
+portuguese_students = pd.read_csv('C:\\Users\\Rakon\\Desktop\\DataAnalytics\\Lab 8\\student_portuguese_clean.csv')
+weekday_math = math_students.groupby('age')['weekday_alcohol'].mean().reset_index()
+weekend_math = math_students.groupby('age')['weekend_alcohol'].mean().reset_index()
+weekday_portuguese = portuguese_students.groupby('age')['weekday_alcohol'].mean().reset_index()
+weeekend_portuguese = portuguese_students.groupby('age')['weekend_alcohol'].mean().reset_index()
+fig, axs = plt.subplots(1, 2, figsize=(12, 6))
+axs[0].plot(weekday_math['age'], weekday_math['weekday_alcohol'], color='skyblue', label='Weekday')
+axs[0].plot(weekday_math['age'], weekend_math['weekend_alcohol'], color='salmon', label='Weekend')
+axs[0].set_title('Math Students')
+axs[0].set_xlabel('Age')
+axs[0].set_ylabel('Average Alcohol')
+axs[1].plot(weekday_portuguese['age'], weekday_portuguese['weekday_alcohol'], color='skyblue', label='Weekday')
+axs[1].plot(weekday_portuguese['age'], weeekend_portuguese['weekend_alcohol'], color='salmon', label='Weekend')
+axs[1].set_title('Portuguese Students')
+axs[1].set_xlabel('Age')
+axs[1].set_ylabel('Average Alcohol')
+plt.tight_layout()
+plt.show()

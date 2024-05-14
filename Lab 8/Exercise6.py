@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+math_students = pd.read_csv('C:\\Users\\Rakon\\Desktop\\DataAnalytics\\Lab 8\\student_math_clean.csv')
+portuguese_students = pd.read_csv('C:\\Users\\Rakon\\Desktop\\DataAnalytics\\Lab 8\\student_portuguese_clean.csv')
+mother_math = math_students.groupby(['mother_education']).size().reset_index()
+father_math = math_students.groupby(['father_education']).size().reset_index()
+mother_portuguese = portuguese_students.groupby(['mother_education']).size().reset_index()
+father_portuguese = portuguese_students.groupby(['father_education']).size().reset_index()
+fig, axs = plt.subplots(1, 2, figsize=(12, 6))
+x = np.arange(len(father_math['father_education']))
+width = 0.35
+axs[0].bar(x - width/2, father_math[0], width, color='skyblue', label='Father')
+axs[0].bar(x + width/2, mother_math[0], width, color='salmon', label='Mother')
+axs[0].set_xticks(x, father_math['father_education'])
+axs[0].set_xlabel('Education Type')
+axs[0].set_ylabel('Count')
+axs[0].set_title('Math Students')
+axs[1].bar(x - width/2, father_portuguese[0], width, color='skyblue', label='Father')
+axs[1].bar(x + width/2, mother_portuguese[0], width, color='salmon', label='Mother')
+axs[1].set_xticks(x, father_portuguese['father_education'])
+axs[1].set_xlabel('Education Type')
+axs[1].set_ylabel('Count')
+axs[1].set_title('Portuguese Students')
+plt.tight_layout()
+plt.show()
